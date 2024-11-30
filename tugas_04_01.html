@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Alumni Mahasiswa</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        table th,
+        table td {
+            border: 1px solid rgb(0, 0, 0);
+            padding: 10px;
+            text-align: left;
+        }
+
+        table tbody tr:hover {
+            background-color: #f0f8ff;
+            cursor: pointer;
+        }
+
+        #search-box {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        #search-box input {
+            padding: 5px;
+            font-size: 16px;
+            width: 150px;
+        }
+
+        #search-box button {
+            padding: 5px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <b><u>PROFIL ALUMNI MAHASISWA</u></b>
+    <div id="search-box">
+        <input
+            type="text"
+            id="search-input"
+            placeholder="Masukkan kata kunci"
+            onkeyup="filterTable()">
+        <button onclick="resetTable()">Reset</button>
+    </div>
+    <div>
+        <table id="alumni-table" border="1" cellpadding="5" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Angkatan</th>
+                    <th>Pekerjaan</th>
+                    <th>Jurusan</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Ahmad Sodikin</td>
+                    <td>2012</td>
+                    <td>Full Stack Programmer</td>
+                    <td>Sistem Informasi</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Roy Kimono</td>
+                    <td>2011</td>
+                    <td>Cyber Security</td>
+                    <td>Teknik Informatika</td>
+                </tr>
+                <tr>
+                <td>3</td>
+                <td>ilham abduloh</td>
+                <td>2000</td>
+                <td>data analis</td>
+                <td>Sistem Informasi</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <script>
+            function filterTable() {
+                const input = document.getElementById("search-input").value.toLowerCase();
+                const table = document.getElementById("alumni-table");
+                const rows = table.getElementsByTagName("tr");
+
+                for (let i = 1; i < rows.length; i++) {
+                    const cells = rows[i].getElementsByTagName("td");
+                    const name = cells[1].textContent.toLowerCase();
+                    const major = cells[4].textContent.toLowerCase();
+
+                    if (name.includes(input) || major.includes(input)) {
+                        rows[i].style.display = "";
+                    } else {
+                        rows[i].style.display = "none";
+                    }
+                }
+            }
+
+            function resetTable() {
+                const table = document.getElementById("alumni-table");
+                const rows = table.getElementsByTagName("tr");
+
+                for (let i = 1; i < rows.length; i++) {
+                    rows[i].style.display = "";
+                }
+
+                document.getElementById("search-input").value = "";
+            }
+        </script>
+    </div>
+</body>
+</html>
